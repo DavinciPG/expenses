@@ -2,6 +2,7 @@ import './App.css';
 
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
+import ExpensesFilter from "./components/Expenses/ExpensesFilter";
 
 const App = () => {
     const expenses = [
@@ -22,9 +23,14 @@ const App = () => {
         console.log(expense)
     }
 
+    const filterExpenseHandler = (filter) =>{
+        console.log('Filter Data in App.js', filter)
+    }
+
   return (
     <div className="App">
         <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
+        <ExpensesFilter onFilterChange={filterExpenseHandler}></ExpensesFilter>
         <Expenses expenseData={expenses}></Expenses>
     </div>
   );
