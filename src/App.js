@@ -4,23 +4,31 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import ExpensesFilter from "./components/Expenses/ExpensesFilter";
 
+import React, { useState } from "react";
+
+const DUMMY_EXPENSES = [
+    {
+        id:"e1",
+        date: new Date(2023, 0, 10),
+        title: 'New book',
+        price: 30.99
+    },
+    {
+        id:"e2",
+        date: new Date(2023, 0, 10),
+        title: 'New Jeans',
+        price: 99.99
+    }
+]
+
 const App = () => {
-    const expenses = [
-        {
-            date: new Date(2023, 0, 10),
-            title:'New book',
-            price: 30.99
-        },
-        {
-            date: new Date(2023, 0, 5),
-            title:'Icecream',
-            price: 3.99
-        }
-    ]
+    const [expenses,setExpenses] = useState(DUMMY_EXPENSES)
 
     const addExpenseHandler = (expense) =>{
         console.log('In App.js')
-        console.log(expense)
+        setExpenses((previousExpenses )=>{
+            return [expense,...expenses]
+        })
     }
 
     const filterExpenseHandler = (filter) =>{
@@ -31,7 +39,7 @@ const App = () => {
     <div className="App">
         <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
         <ExpensesFilter onFilterChange={filterExpenseHandler}></ExpensesFilter>
-        <Expenses expenseData={expenses}></Expenses>
+        <Expenses expenseData={DUMMY_EXPENSES}></Expenses>
     </div>
   );
 }
